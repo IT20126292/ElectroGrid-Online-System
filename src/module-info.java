@@ -1,2 +1,2 @@
-module com.vogella.eclipse.ide.first {
-}
+// module com.vogella.eclipse.ide.first {
+// }
