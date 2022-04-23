@@ -23,7 +23,6 @@ public class ShowUserServlet extends HttpServlet {
 		res.setContentType("text/html");
 		//link the bootstrap
 //		pw.println("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css'></link>");
-//		pw.println("<h1 class='text-center mb-5'>User Data</h1>");
 		//load the JDBC driver
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
