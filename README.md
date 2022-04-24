@@ -1,2 +1,2 @@
 # ElectroGrid-Online-System
-PAF Project 2022 
+SLIIT Third Year Fist Semester - PAF Project 2022 
