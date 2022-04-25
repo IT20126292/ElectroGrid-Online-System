@@ -16,7 +16,7 @@ public class Tester {
 	      counter.count(256);
 	    } catch (RuntimeException e) {
 	      System.out.println("Works as exepected");
-	    }
+		  System.out.println("....");
 	  }
 
 	}
