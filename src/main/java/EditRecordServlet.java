@@ -21,7 +21,7 @@ public class EditRecordServlet extends HttpServlet {
 		//set content type
 		res.setContentType("text/html");
 		//link the bootstrap
-		pw.println("<link rel='stylesheet' href='css/bootstrap.css'></link>");
+//		pw.println("<link rel='stylesheet' href='css/bootstrap.css'></link>");
 		//get the values
 		int id = Integer.parseInt(req.getParameter("id"));
 		String name = req.getParameter("name");
