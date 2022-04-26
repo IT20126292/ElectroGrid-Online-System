@@ -3,7 +3,7 @@ package com.vogella.ide.counter.main;
 
 import com.vogella.ide.counter.util.Counter;
 
-public class Tester {
+public class getDetails {
 
 	public static void main(String[] args) {
 		Counter counter = new Counter();
