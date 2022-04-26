@@ -10,9 +10,13 @@ public class MyFirstClass {
 		int x = 1;
 
 		if(x>0){
-			System.out.println("Test Output");
+			System.out.println("Test Output 1");
 		}else{
-			System.out.println("Test Output");
+			System.out.println("Test Output 2");
+		}
+
+		int test(string x){
+			System.out.println("Test Output 3");
 		}
 	}
 
