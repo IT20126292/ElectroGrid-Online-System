@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class Bill {
+public class Customer {
 
 	private Connection connect() {
 		Connection con = null;
@@ -24,7 +24,7 @@ public class Bill {
 		return con;
 	}
 
-	public String insertBill(String billName, String billAmount, String billDate, String NoOfTunits, String BillAr) {
+	public String insertCustomer(String cus_Name, String cus_Nic, String cus_addr, String cus_pnumber, String cus_email, String cus_pwd) {
 		String output = "";
 		try {
 			Connection con = connect();
@@ -32,20 +32,21 @@ public class Bill {
 				return "Error while connecting to the database for inserting.";
 			}
 			// create a prepared statement
-			String query = " insert into bill(`billID`,`billName`,`billAmount`,`billDate`,`NoOfTunits`,`BillAr`)"
-					+ " values (?, ?, ?, ?, ?, ?)";
+			String query = " insert into customer(`cID`,`cus_Name`,`cus_Nic`,`cus_addr`,`cus_pnumber`,`cus_email`,`cus_pwd`)"
+					+ " values (?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			preparedStmt.setInt(1, 0);
-			preparedStmt.setString(2, billName);
-			preparedStmt.setString(3, billAmount);
-			preparedStmt.setString(4, billDate);
-			preparedStmt.setString(5, NoOfTunits);
-			preparedStmt.setString(6, BillAr);
+			preparedStmt.setString(2, cus_Name);
+			preparedStmt.setString(3, cus_Nic);
+			preparedStmt.setString(4, cus_addr);
+			preparedStmt.setString(5, cus_pnumber);
+			preparedStmt.setString(6, cus_email);
+			preparedStmt.setString(7, cus_pwd);
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			output = "Inserted successfully";
+			output = "New User Created Successfully !";
 		} catch (Exception e) {
 			output = "Error while inserting the customer.";
 			System.err.println(e.getMessage());
@@ -53,7 +54,7 @@ public class Bill {
 		return output;
 	}
 
-	public String readBill() {
+	public String readCustomer() {
 		String output = "";
 		try {
 			Connection con = connect();
@@ -61,26 +62,28 @@ public class Bill {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
-			output = "<table border=\"1\"><tr><th>ID</th><th>Bill Name</th><th>Bill Amount</th><th>Bill Date</th><th>Units</th><th>Bill AR</th></tr>";
-			String query = "select * from bill";
+			output = "<table border=\"1\"><tr><th>ID</th><th>Customer Name</th><th>Customer NIC</th><th>Customer Address</th><th>Customer PhoneNumber</th><th>Customer Email</th><th>Customer Pass</th></tr>";
+			String query = "select * from customer";
 			Statement stmt = (Statement) con.createStatement();
 			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
 			// iterate through the rows in the result set
 			while (rs.next()) {
-				String billID = Integer.toString(rs.getInt("billID"));
-				String billName = rs.getString("billName");
-				String billAmount = rs.getString("billAmount");
-				String billDate = rs.getString("billDate");
-				String NoOfTunits = rs.getString("NoOfTunits");
-				String BillAr = rs.getString("BillAr");
+				String cID = Integer.toString(rs.getInt("cID"));
+				String cus_Name = rs.getString("cus_Name");
+				String cus_Nic = rs.getString("cus_Nic");
+				String cus_addr = rs.getString("cus_addr");
+				String cus_pnumber = rs.getString("cus_pnumber");
+				String cus_email = rs.getString("cus_email");
+				String cus_pwd = rs.getString("cus_pwd");
 
 				// Add into the html table
-				output += "<tr><td>" + billID + "</td>";
-				output += "<td>" + billName + "</td>";
-				output += "<td>" + billAmount + "</td>";
-				output += "<td>" + billDate + "</td>";
-				output += "<td>" + NoOfTunits + "</td>";
-				output += "<td>" + BillAr + "</td>";
+				output += "<tr><td>" + cID + "</td>";
+				output += "<td>" + cus_Name + "</td>";
+				output += "<td>" + cus_Nic + "</td>";
+				output += "<td>" + cus_addr + "</td>";
+				output += "<td>" + cus_pnumber + "</td>";
+				output += "<td>" + cus_email + "</td>";
+				output += "<td>" + cus_pwd + "</td>";
 				
 			}
 			con.close();
@@ -93,7 +96,7 @@ public class Bill {
 		return output;
 	}
 
-	public String updateBill(String billID, String billName, String billAmount, String billDate, String NoOfTunits, String BillAr) {
+	public String updateCustomer(String cID, String cus_Name, String cus_Nic, String cus_addr, String cus_pnumber, String cus_email, String cus_pwd) {
 		String output = "";
 
 		try {
@@ -104,17 +107,18 @@ public class Bill {
 			}
 
 			// create a prepared statement
-			String query = "UPDATE bill SET billName=?,billAmount=?,billDate=?,NoOfTunits=?,BillAr=?" + "WHERE billID=?";
+			String query = "UPDATE customer SET cus_Name=?,cus_Nic=?,cus_addr=?,cus_pnumber=?,cus_email=?,cus_pwd=?" + "WHERE cID=?";
 
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 
 			// binding values
-			preparedStmt.setString(1, billName);
-			preparedStmt.setString(2, billAmount);
-			preparedStmt.setString(3, billDate);
-			preparedStmt.setString(4, NoOfTunits);
-			preparedStmt.setString(5, BillAr);
-			preparedStmt.setInt(6, Integer.parseInt(billID));
+			preparedStmt.setString(1, cus_Name);
+			preparedStmt.setString(2, cus_Nic);
+			preparedStmt.setString(3, cus_addr);
+			preparedStmt.setString(4, cus_pnumber);
+			preparedStmt.setString(5, cus_pwd);
+			preparedStmt.setString(6, cus_pwd);
+			preparedStmt.setInt(7, Integer.parseInt(cID));
 
 			// execute the statement
 			preparedStmt.execute();
@@ -129,7 +133,7 @@ public class Bill {
 		return output;
 	}
 
-	public String deleteBill(String billID) {
+	public String deleteCustomer(String cID) {
 		String output = "";
 
 		try {
@@ -140,29 +144,24 @@ public class Bill {
 			}
 
 			// create a prepared statement
-			String query = "delete from custom where billID=?";
+			String query = "delete from customer where cID=?";
 
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 
 			// binding values
-			preparedStmt.setInt(1, Integer.parseInt(billID));
+			preparedStmt.setInt(1, Integer.parseInt(cID));
 
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
 
-			output = "Deleted successfully";
+			output = "User Deleted successfully";
 		} catch (Exception e) {
-			output = "Error while deleting the Bill.";
+			output = "Error while deleting the user.";
 			System.err.println(e.getMessage());
 		}
 
 		return output;
 	}
-
-//	public String readBill() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 }
