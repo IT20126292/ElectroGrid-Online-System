@@ -66,7 +66,7 @@ public class PaymentAPI extends HttpServlet {
 		System.out.println("got here");
 		Map paras = getParasMap(request); 
 		 String output = paymentObj.updatePayment(
-		paras.get("billID").toString(), 
+		paras.get("hidPaymentIDSave").toString(), 
 		paras.get("billName").toString(), 
 		paras.get("billAmount").toString(), 
 		paras.get("billDate").toString(), 

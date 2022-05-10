@@ -151,7 +151,7 @@ public class Payment {
 			}
 
 	// Update buyers in the table
-	public String updatePayment(String billID, String billName, String billAmount, String billDate, String NoOfTunits, String BillAr)
+	public String updatePayment(String ID, String billName, String billAmount, String billDate, String NoOfTunits, String BillAr)
 			{ 
 				 String output = ""; 
 				 try
@@ -168,12 +168,13 @@ public class Payment {
 				 PreparedStatement preparedStmt = con.prepareStatement(query);
 				 
 				 // binding values
-				 preparedStmt.setInt(0, Integer.parseInt(billID)); 
+				 
 				 preparedStmt.setString(1, billName); 
 				 preparedStmt.setString(2, billAmount); 
 				 preparedStmt.setString(3, billDate); 
 				 preparedStmt.setString(4, NoOfTunits); 
 				 preparedStmt.setString(5, BillAr); 
+				 preparedStmt.setInt(0, Integer.parseInt(ID)); 
 				 
 				 
 				 // execute the statement
