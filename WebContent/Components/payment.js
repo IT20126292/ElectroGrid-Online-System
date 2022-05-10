@@ -66,7 +66,7 @@ if (status == "success")
 
 $(document).on("click", ".btnUpdate", function(event)
 { 
-$("#billID").val($(this).data("#billID")); 
+$("#hidPaymentIDSave").val($(this).data("#paymentid")); 
  $("#billName").val($(this).closest("tr").find('td:eq(0)').text()); 
  $("#billAmount").val($(this).closest("tr").find('td:eq(1)').text()); 
  $("#billDate").val($(this).closest("tr").find('td:eq(2)').text()); 
@@ -80,7 +80,7 @@ $(document).on("click", ".btnRemove", function(event)
  { 
  url : "PaymentAPI", 
  type : "DELETE", 
- data : "billID=" + $(this).data("billID"),
+ data : "billID=" + $(this).data("paymentid"),
  dataType : "text", 
  complete : function(response, status) 
  { 

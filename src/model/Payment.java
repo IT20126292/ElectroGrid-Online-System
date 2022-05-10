@@ -112,7 +112,7 @@ public class Payment {
 				 // iterate through the rows in the result set
 				 while (res.next()) 
 				 { 
-//					 String billID = Integer.toString(res.getInt("billID")); 
+					 String billID = Integer.toString(res.getInt("billID")); 
 					 String billName = res.getString("billName"); 
 					 String billAmount = res.getString("billAmount"); 
 					 String billDate = res.getString("billDate"); 
@@ -129,9 +129,9 @@ public class Payment {
 					 
 					 // buttons
 					 output += "<td><input name='btnUpdate' type='button' value='Update' "
-							 + "class='btnUpdate btn btn-secondary' data-paymentid='"  + "'></td>"
+							 + "class='btnUpdate btn btn-secondary' data-paymentid='" + billID  + "'></td>"
 							 + "<td><input name='btnRemove' type='button' value='Remove' "
-							 + "class='btnRemove btn btn-danger' data-paymentid='" + "'></td></tr>";
+							 + "class='btnRemove btn btn-danger' data-paymentid='" + billID + "'></td></tr>";
 				 } 
 				 
 				con.close(); 
@@ -168,12 +168,13 @@ public class Payment {
 				 PreparedStatement preparedStmt = con.prepareStatement(query);
 				 
 				 // binding values
+				 preparedStmt.setInt(0, Integer.parseInt(billID)); 
 				 preparedStmt.setString(1, billName); 
 				 preparedStmt.setString(2, billAmount); 
 				 preparedStmt.setString(3, billDate); 
 				 preparedStmt.setString(4, NoOfTunits); 
 				 preparedStmt.setString(5, BillAr); 
-				 preparedStmt.setInt(6, Integer.parseInt(billID)); 
+				 
 				 
 				 // execute the statement
 				    preparedStmt.execute(); 
