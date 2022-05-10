@@ -96,12 +96,11 @@ public class Payment {
 				 
 				 // Prepare the html table to be displayed
 				 output = "<table border='1' class='table table-dark table-hover'>"
-				 		 + "<tr><th>Bill ID</th>" 
-						 +"<th>billName</th>"
-						 + "<th>billAmount</th>"
-						 + "<th>billDate</th>" 
-						 +"<th>NoOfTunits</th>"
-						 + "<th>BillAr</th>"
+				 		 + "<tr><th>billName</th>" 
+						 +"<th>billAmount</th>"
+						 + "<th>billDate</th>"
+						 + "<th>NoOfTunits</th>" 
+						 +"<th>BillAr</th>"
 						 + "<th>Update</th>"
 						 + "<th>Delete</th></tr>"; 
 				 
@@ -113,7 +112,7 @@ public class Payment {
 				 // iterate through the rows in the result set
 				 while (res.next()) 
 				 { 
-					 String billID = Integer.toString(res.getInt("billID")); 
+//					 String billID = Integer.toString(res.getInt("billID")); 
 					 String billName = res.getString("billName"); 
 					 String billAmount = res.getString("billAmount"); 
 					 String billDate = res.getString("billDate"); 
@@ -121,18 +120,18 @@ public class Payment {
 					 String BillAr = res.getString("BillAr"); 
 					 
 					 // Add a row into the html table
-					 output += "<tr><td>" + billID + "</td>"; 
-					 output += "<td>" + billName + "</td>"; 
-					 output += "<td>" + billAmount + "</td>";
+					 output += "<tr><td>" + billName + "</td>"; 
+					 output += "<td>" + billAmount + "</td>"; 
 					 output += "<td>" + billDate + "</td>";
-					 output += "<td>" + NoOfTunits + "</td>"; 
+					 output += "<td>" + NoOfTunits + "</td>";
 					 output += "<td>" + BillAr + "</td>"; 
+					 
 					 
 					 // buttons
 					 output += "<td><input name='btnUpdate' type='button' value='Update' "
-							 + "class='btnUpdate btn btn-secondary' data-paymentid='" + billID + "'></td>"
+							 + "class='btnUpdate btn btn-secondary' data-paymentid='"  + "'></td>"
 							 + "<td><input name='btnRemove' type='button' value='Remove' "
-							 + "class='btnRemove btn btn-danger' data-paymentid='" + billID + "'></td></tr>";
+							 + "class='btnRemove btn btn-danger' data-paymentid='" + "'></td></tr>";
 				 } 
 				 
 				con.close(); 
@@ -174,7 +173,7 @@ public class Payment {
 				 preparedStmt.setString(3, billDate); 
 				 preparedStmt.setString(4, NoOfTunits); 
 				 preparedStmt.setString(5, BillAr); 
-				 preparedStmt.setInt(9, Integer.parseInt(billID)); 
+				 preparedStmt.setInt(6, Integer.parseInt(billID)); 
 				 
 				 // execute the statement
 				    preparedStmt.execute(); 
