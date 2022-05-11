@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class Payment {
+public class Bill {
 	// Connect to the DB
 	public Connection connect() {
 		Connection con = null;
@@ -29,8 +29,8 @@ public class Payment {
 
 	}
 
-	         //Insert payment
-			public String insertPayment(String billName, String billAmount, String billDate, String NoOfTunits, String BillAr)
+	         //Insert Bill
+			public String insertBill(String billName, String billAmount, String billDate, String NoOfTunits, String BillAr)
 			{ 
 				Connection con = connect();
 				String output = "";
@@ -60,16 +60,16 @@ public class Payment {
 					 Pstatement.execute(); 
 					 con.close();
 					// System.out.println(query);
-					 String newPayment = readPayment(); 
+					 String newBill = readBill(); 
 					 output = "{\"status\":\"success\", \"data\": \"" + 
-					 newPayment + "\"}"; 
+					 newBill + "\"}"; 
 					 
-					// output = "Payment Inserted successfully"; 
+					// output = "Bill Inserted successfully"; 
 				 } 
 				
 				catch (Exception e) 
 				 { 
-					 output = "{\"status\":\"error\", \"data\": \"Error while inserting the Payment.\"}"; 
+					 output = "{\"status\":\"error\", \"data\": \"Error while inserting the Bill.\"}"; 
 					// output = "Error while inserting"; 
 					 
 					System.err.println(e.getMessage()); 
@@ -78,8 +78,8 @@ public class Payment {
 				return output; 
 			}
 
-			//Read the payment
-			public String readPayment()
+			//Read the bill
+			public String readBill()
 			{ 
 				 String output = ""; 
 				 
@@ -89,7 +89,7 @@ public class Payment {
 			     Connection con = connect(); 
 				 if (con == null) 
 				 { 
-					 return "Error while connecting to the database for reading."; 
+					 return "Error while connecting to the database for reading the Bills."; 
 				 } 
 				 
 				 
@@ -128,9 +128,9 @@ public class Payment {
 					 
 					 // buttons
 					 output += "<td><input name='btnUpdate' type='button' value='Update' "
-							 + "class='btnUpdate btn btn-secondary' data-paymentid='" + billID  + "'></td>"
+							 + "class='btnUpdate btn btn-secondary' data-billid='" + billID  + "'></td>"
 							 + "<td><input name='btnRemove' type='button' value='Remove' "
-							 + "class='btnRemove btn btn-danger' data-paymentid='" + billID + "'></td></tr>";
+							 + "class='btnRemove btn btn-danger' data-billid='" + billID + "'></td></tr>";
 				 } 
 				 
 				con.close(); 
@@ -141,7 +141,7 @@ public class Payment {
 				 
 				catch (Exception e) 
 				 { 
-					 output = "Error while reading the payment details."; 
+					 output = "Error while reading the bill details."; 
 					 System.err.println(e.getMessage()); 
 				 } 
 				
@@ -150,7 +150,7 @@ public class Payment {
 			}
 
 	// Update buyers in the table
-	public String updatePayment(String ID, String billName, String billAmount, String billDate, String NoOfTunits, String BillAr)
+	public String updateBill(String ID, String billName, String billAmount, String billDate, String NoOfTunits, String BillAr)
 			{ 
 				 String output = ""; 
 				 try
@@ -158,7 +158,7 @@ public class Payment {
 				 Connection con = connect(); 
 				 if (con == null) 
 				 {
-					 return "Error while connecting to the database for updating."; 
+					 return "Error while connecting to the database for updating the bill."; 
 					 
 				 } 
 				 // create a prepared statement
@@ -173,23 +173,23 @@ public class Payment {
 				 preparedStmt.setString(3, billDate); 
 				 preparedStmt.setString(4, NoOfTunits); 
 				 preparedStmt.setString(5, BillAr); 
-				 preparedStmt.setInt(0, Integer.parseInt(ID)); 
+				 preparedStmt.setInt(6, Integer.parseInt(ID)); 
 				 
 				 
 				 // execute the statement
 				    preparedStmt.execute(); 
 				    con.close(); 
-				    String newPayment = readPayment(); 
+				    String newBill = readBill(); 
 					 output = "{\"status\":\"success\", \"data\": \"" + 
-					 newPayment + "\"}"; 
+					 newBill + "\"}"; 
 					 
-				   // output = "Payment Updated successfully"; 
+				   // output = "Bill Updated successfully"; 
 				 } 
 				 
 				 catch (Exception e) 
 				 { 
-					 output = "{\"status\":\"error\", \"data\": \"Error while Updating the Payment.\"}"; 
-				     //output = "Error while updating the payment details."; 
+					 output = "{\"status\":\"error\", \"data\": \"Error while Updating the Bill.\"}"; 
+				     //output = "Error while updating the bill details."; 
 				     System.err.println(e.getMessage()); 
 				 } 
 				 
@@ -197,14 +197,14 @@ public class Payment {
 				 }
 
 	// Delete buyer in the table
-	public String deletePayment(String billID) {
+	public String deleteBill(String billID) {
 		String output = "";
 
 		try {
 			Connection con = connect();
 
 			if (con == null) {
-				return "Error while connecting to the database for deleting.";
+				return "Error while connecting to the database for deleting the bill.";
 			}
 
 			// create a prepared statement
@@ -218,14 +218,14 @@ public class Payment {
 			preparedStmt.execute();
 			con.close();
 
-			  String newPayment = readPayment(); 
+			  String newBill = readBill(); 
 				 output = "{\"status\":\"success\", \"data\": \"" + 
-				 newPayment + "\"}"; 
-		//	output = "payment details Deleted successfully";
+				 newBill + "\"}"; 
+		//	output = "bill details Deleted successfully";
 
 		} catch (Exception e) {
-			 output = "{\"status\":\"error\", \"data\": \"Error while Deleting the Payment.\"}"; 
-		//	output = "Error while deleting the payment details.";
+			 output = "{\"status\":\"error\", \"data\": \"Error while Deleting the Bill.\"}"; 
+		//	output = "Error while deleting the Bill details.";
 			System.err.println(e.getMessage());
 		}
 

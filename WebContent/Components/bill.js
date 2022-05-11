@@ -14,7 +14,7 @@ $(document).on("click", "#btnSave", function(event)
  $("#alertError").text(""); 
  $("#alertError").hide(); 
 // Form validation-------------------
-var status = validatePaymentForm(); 
+var status = validateBillForm(); 
 if (status != true) 
  { 
  $("#alertError").text(status); 
@@ -22,21 +22,21 @@ if (status != true)
  return; 
  } 
 // If valid------------------------
-var type = ($("#hidPaymentIDSave").val() == "") ? "POST" : "PUT"; 
+var type = ($("#hidBillIDSave").val() == "") ? "POST" : "PUT"; 
  $.ajax( 
  { 
- url : "PaymentAPI", 
+ url : "BillAPI", 
  type : type, 
- data : $("#formPayment").serialize(), 
+ data : $("#formBill").serialize(), 
  dataType : "text", 
  complete : function(response, status) 
  { 
- onPaymentSaveComplete(response.responseText, status); 
+ onBillSaveComplete(response.responseText, status); 
  } 
  }); 
 });
 
-function onPaymentSaveComplete(response, status)
+function onBillSaveComplete(response, status)
 { 
 if (status == "success") 
  { 
@@ -45,7 +45,7 @@ if (status == "success")
  { 
  $("#alertSuccess").text("Successfully saved."); 
  $("#alertSuccess").show(); 
- $("#divPaymentGrid").html(resultSet.data); 
+ $("#divBillGrid").html(resultSet.data); 
  } else if (resultSet.status.trim() == "error") 
  { 
  $("#alertError").text(resultSet.data); 
@@ -60,13 +60,13 @@ if (status == "success")
  $("#alertError").text("Unknown error while saving.."); 
  $("#alertError").show(); 
  } 
- $("#hidPaymentIDSave").val(""); 
+ $("#hidBillIDSave").val(""); 
  $("#formItem")[0].reset(); 
 }
 
 $(document).on("click", ".btnUpdate", function(event)
 { 
-$("#hidPaymentIDSave").val($(this).data("#paymentid")); 
+$("#hidBillIDSave").val($(this).data("#billid")); 
  $("#billName").val($(this).closest("tr").find('td:eq(0)').text()); 
  $("#billAmount").val($(this).closest("tr").find('td:eq(1)').text()); 
  $("#billDate").val($(this).closest("tr").find('td:eq(2)').text()); 
@@ -78,18 +78,18 @@ $(document).on("click", ".btnRemove", function(event)
 { 
  $.ajax( 
  { 
- url : "PaymentAPI", 
+ url : "BillAPI", 
  type : "DELETE", 
- data : "billID=" + $(this).data("paymentid"),
+ data : "billID=" + $(this).data("billid"),
  dataType : "text", 
  complete : function(response, status) 
  { 
- onPaymentDeleteComplete(response.responseText, status); 
+ onBillDeleteComplete(response.responseText, status); 
  } 
  }); 
 });
 
-function onPaymentDeleteComplete(response, status)
+function onBillDeleteComplete(response, status)
 { 
 if (status == "success") 
  { 
@@ -98,7 +98,7 @@ if (status == "success")
  { 
  $("#alertSuccess").text("Successfully deleted."); 
  $("#alertSuccess").show(); 
- $("#divPaymentGrid").html(resultSet.data); 
+ $("#divBillGrid").html(resultSet.data); 
  } else if (resultSet.status.trim() == "error") 
  { 
  $("#alertError").text(resultSet.data); 
@@ -114,7 +114,7 @@ if (status == "success")
  $("#alertError").show(); 
  } 
 }
-function validatePaymentForm() 
+function validateBillForm() 
 {
 	//NAME
 	if ($("#billName").val().trim() == "")

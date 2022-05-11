@@ -1,4 +1,4 @@
-<%@page import="model.Payment"%>
+<%@page import="model.Bill"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -8,7 +8,7 @@
 <title>Bill</title>
 <link rel="stylesheet" href="View/bootstrap.min.css">
 <script src="Components/jquery-3.2.1.min.js"></script>
-<script src="Components/payment.js"></script>
+<script src="Components/bill.js"></script>
 </head>
 <body>
 
@@ -20,7 +20,7 @@
 
 				<h1>Bill</h1>
 				<h3>IT20129576</h3>
-				<form id="formPayment" name="formPayment" method="post" action="payment.jsp">
+				<form id="formBill" name="formBill" method="post" action="bill.jsp">
 					
 					billName: 
 					<input id="billName" name="billName" type="text" class="form-control form-control-sm"> <br> 
@@ -33,7 +33,7 @@
 				    BillAr:
 					<input id="BillAr" name="BillAr" type="text" class="form-control form-control-sm"> <br> 
 					<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary"> 
-					<input type="hidden" id="hidPaymentIDSave" name="hidPaymentIDSave" value="">
+					<input type="hidden" id="hidBillIDSave" name="hidBillIDSave" value="">
 				</form>
 
 				<div id="alertSuccess" class="alert alert-success"></div>
@@ -41,11 +41,11 @@
 
 			
 				<br>
-				<div id="divPaymentGrid">
+				<div id="divBillGrid">
 
 					<%
-					Payment paymentObj = new Payment();
-					out.print(paymentObj.readPayment());
+						Bill billObj = new Bill();
+								out.print(billObj.readBill());
 					%>
 				</div>
 

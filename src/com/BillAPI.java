@@ -11,22 +11,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Payment;
+import model.Bill;
 
 
 /**
- * Servlet implementation class PaymentAPI
+ * Servlet implementation class BillAPI
  */
-@WebServlet("/PaymentAPI")
-public class PaymentAPI extends HttpServlet {
+@WebServlet("/BillAPI")
+public class BillAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-		Payment paymentObj = new Payment();
+		Bill billObj = new Bill();
 	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PaymentAPI() {
+    public BillAPI() {
         //super();
         // TODO Auto-generated constructor stub
     }
@@ -46,7 +46,7 @@ public class PaymentAPI extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		System.out.println("done insert");
-		String output = paymentObj.insertPayment(
+		String output = billObj.insertBill(
 				request.getParameter("billName"), 
 				request.getParameter("billAmount"),
 				request.getParameter("billDate"), 
@@ -65,8 +65,8 @@ public class PaymentAPI extends HttpServlet {
 		
 		System.out.println("got here");
 		Map paras = getParasMap(request); 
-		 String output = paymentObj.updatePayment(
-		paras.get("hidPaymentIDSave").toString(), 
+		 String output = billObj.updateBill(
+		paras.get("hidBillIDSave").toString(), 
 		paras.get("billName").toString(), 
 		paras.get("billAmount").toString(), 
 		paras.get("billDate").toString(), 
@@ -103,7 +103,7 @@ public class PaymentAPI extends HttpServlet {
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Map paras = getParasMap(request);
-		String output = paymentObj.deletePayment(paras.get("billID").toString());
+		String output = billObj.deleteBill(paras.get("billID").toString());
 		response.getWriter().write(output);
 	}
 
