@@ -43,8 +43,7 @@ public class Payment {
 					 } 
 					 
 					 // create a prepared statement
-					 String query = " insert into bill (`billID`,`billName`,`billAmount`,`billDate`,`NoOfTunits`,`BillAr`)"+ " values (?, ?, ?, ?, ?, ?)"; 
-					 
+					 String query = " insert into bill (`billID`,`billName`,`billAmount`,`billDate`,`NoOfTunits`,`BillAr`)"+ " values (?, ?, ?, ?, ?,?)"; 
 					 PreparedStatement Pstatement = con.prepareStatement(query); 
 					 
 					 // binding values
@@ -97,11 +96,11 @@ public class Payment {
 				 // Prepare the html table to be displayed
 				 output = "<table border='1' class='table table-dark table-hover'>"
 				 		 + "<tr><th>billName</th>" 
-						 +"<th>billAmount</th>"
-						 + "<th>billDate</th>"
-						 + "<th>NoOfTunits</th>" 
-						 +"<th>BillAr</th>"
-						 + "<th>Update</th>"
+				 		+"<th>billAmount</th>"
+						 +"<th>billDate</th>"
+						 + "<th>NoOfTunits</th>"
+						 + "<th>BillAr</th>" 
+						 +"<th>Update</th>"
 						 + "<th>Delete</th></tr>"; 
 				 
 				 String query = "select * from bill"; 
@@ -122,7 +121,7 @@ public class Payment {
 					 // Add a row into the html table
 					 output += "<tr><td>" + billName + "</td>"; 
 					 output += "<td>" + billAmount + "</td>"; 
-					 output += "<td>" + billDate + "</td>";
+					 output += "<td>" + billDate + "</td>"; 
 					 output += "<td>" + NoOfTunits + "</td>";
 					 output += "<td>" + BillAr + "</td>"; 
 					 
