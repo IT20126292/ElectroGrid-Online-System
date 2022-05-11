@@ -119,11 +119,11 @@ public class Bill {
 					 String BillAr = res.getString("BillAr"); 
 					 
 					 // Add a row into the html table
-					 output += "<tr><td>" + billName + "</td>"; 
+					 output += "<tr><td>" + billName + "</td>";
 					 output += "<td>" + billAmount + "</td>"; 
-					 output += "<td>" + billDate + "</td>"; 
-					 output += "<td>" + NoOfTunits + "</td>";
-					 output += "<td>" + BillAr + "</td>"; 
+					 output += "<td>" + billDate + "</td>";
+					 output += "<td>" + NoOfTunits + "</td>"; 
+					 output += "<td>" + BillAr + "</td>";
 					 
 					 
 					 // buttons
@@ -150,7 +150,7 @@ public class Bill {
 			}
 
 	// Update buyers in the table
-	public String updateBill(String ID, String billName, String billAmount, String billDate, String NoOfTunits, String BillAr)
+	public String updateBill(String billID, String billName, String billAmount, String billDate, String NoOfTunits, String BillAr)
 			{ 
 				 String output = ""; 
 				 try
@@ -173,7 +173,7 @@ public class Bill {
 				 preparedStmt.setString(3, billDate); 
 				 preparedStmt.setString(4, NoOfTunits); 
 				 preparedStmt.setString(5, BillAr); 
-				 preparedStmt.setInt(6, Integer.parseInt(ID)); 
+				 preparedStmt.setInt(0, Integer.parseInt(billID)); 
 				 
 				 
 				 // execute the statement
