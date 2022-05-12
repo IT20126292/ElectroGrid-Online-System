@@ -55,7 +55,7 @@
 				    BillAr:
 					<input id="BillAr" name="BillAr" type="text" class="form-control form-control-sm"> <br> 
 					<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary"> 
-					<input type="text" id="hidBillIDSave" name="hidBillIDSave" >
+					<input type="text" id="hidBillIDSave" name="hidBillIDSave" value=" ">
 				</form>
 				<div id="alertSuccess" class="alert alert-success"></div>
 				<div id="alertError" class="alert alert-danger"></div>
@@ -177,7 +177,7 @@
                 </div>
                 <!-- Footer Links -->
                 <!-- Copyright -->
-                <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                <div class="footer-copyright text-center py-3">ï¿½ 2020 Copyright:
                     <a href="/"> MDBootstrap.com</a>
                 </div>
                 <!-- Copyright -->

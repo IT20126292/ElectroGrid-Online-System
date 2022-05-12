@@ -30,7 +30,7 @@ public class Bill {
 	}
 
 	         //Insert Bill
-			public String insertBill(String billName, String billAmount, String billDate, String NoOfTunits, String BillAr)
+			public String insertBill(String name, String amount, String date, String units, String ar)
 			{ 
 				Connection con = connect();
 				String output = "";
@@ -48,11 +48,11 @@ public class Bill {
 					 
 					 // binding values
 					 Pstatement.setInt(1, 0); 
-					 Pstatement.setString(2, billName); 
-					 Pstatement.setString(3, billAmount); 
-					 Pstatement.setString(4, billDate); 
-					 Pstatement.setString(5, NoOfTunits);
-					 Pstatement.setString(6, BillAr);
+					 Pstatement.setString(2, name); 
+					 Pstatement.setString(3, amount); 
+					 Pstatement.setString(4, date); 
+					 Pstatement.setString(5, units);
+					 Pstatement.setString(6, ar);
 					 
 					 
 					//execute the statement
@@ -116,8 +116,8 @@ public class Bill {
 					 String billAmount = res.getString("billAmount"); 
 					 String billDate = res.getString("billDate"); 
 					 String NoOfTunits = res.getString("NoOfTunits"); 
-					 String BillAr = res.getString("BillAr"); 
-					 
+					 String BillAr = res.getString("BillAr");
+					  
 					 // Add a row into the html table
 					 output += "<tr><td>" + billName + "</td>";
 					 output += "<td>" + billAmount + "</td>"; 
@@ -125,7 +125,7 @@ public class Bill {
 					 output += "<td>" + NoOfTunits + "</td>"; 
 					 output += "<td>" + BillAr + "</td>";
 					 
-					 
+					 				 
 					 // buttons
 					 output += "<td><input name='btnUpdate' type='button' value='Update' "
 							 + "class='btnUpdate btn btn-secondary' data-billid='" + billID  + "'></td>"
@@ -150,7 +150,7 @@ public class Bill {
 			}
 
 	// Update buyers in the table
-	public String updateBill(String billID, String billName, String billAmount, String billDate, String NoOfTunits, String BillAr)
+	public String updateBill(String ID, String name, String amount, String date, String units, String ar)
 			{ 
 				 String output = ""; 
 				 try
@@ -162,18 +162,18 @@ public class Bill {
 					 
 				 } 
 				 // create a prepared statement
-				 String query = "UPDATE bill SET billName=?,billAmount=?,billDate=?,NoOfTunits=?,BillAr=? WHERE billID=? ";
+				 String query = "UPDATE bill SET billName=?, billAmount=?, billDate=?, NoOfTunits=?, BillAr=? WHERE billID=?";
 					
 				 PreparedStatement preparedStmt = con.prepareStatement(query);
 				 
 				 // binding values
 				 
-				 preparedStmt.setString(1, billName); 
-				 preparedStmt.setString(2, billAmount); 
-				 preparedStmt.setString(3, billDate); 
-				 preparedStmt.setString(4, NoOfTunits); 
-				 preparedStmt.setString(5, BillAr); 
-				 preparedStmt.setInt(0, Integer.parseInt(billID)); 
+				 preparedStmt.setString(1, name); 
+				 preparedStmt.setString(2, amount); 
+				 preparedStmt.setString(3, date); 
+				 preparedStmt.setString(4, units); 
+				 preparedStmt.setString(5, ar); 
+				 preparedStmt.setInt(6, Integer.parseInt(ID)); 
 				 
 				 
 				 // execute the statement
