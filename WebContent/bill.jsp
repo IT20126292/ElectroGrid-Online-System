@@ -52,7 +52,7 @@
 					<input id="billDate" name="billDate" type="date" class="form-control form-control-sm" type="date"> <br>
 					NoOfTunits: 
 					<input id="NoOfTunits" name="NoOfTunits" type="number" class="form-control form-control-sm"> <br> 
-				    BillAr:
+				    Bill Arrears:
 					<input id="BillAr" name="BillAr" type="text" class="form-control form-control-sm"> <br> 
 					<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary"> 
 					<input type=" " id="hidBillIDSave" name="hidBillIDSave" value="">
