@@ -47,15 +47,15 @@
 					billName: 
 					<input id="billName" name="billName" type="text" class="form-control form-control-sm"> <br> 
 				    billAmount:
-					<input id="billAmount" name="billAmount" type="text" class="form-control form-control-sm" type="number"> <br> 
+					<input id="billAmount" name="billAmount" type="number" class="form-control form-control-sm" type="number"> <br> 
 					billDate: 
-					<input id="billDate" name="billDate" type="text" class="form-control form-control-sm" type="date"> <br>
+					<input id="billDate" name="billDate" type="date" class="form-control form-control-sm" type="date"> <br>
 					NoOfTunits: 
-					<input id="NoOfTunits" name="NoOfTunits" type="text" class="form-control form-control-sm"> <br> 
+					<input id="NoOfTunits" name="NoOfTunits" type="number" class="form-control form-control-sm"> <br> 
 				    BillAr:
 					<input id="BillAr" name="BillAr" type="text" class="form-control form-control-sm"> <br> 
 					<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary"> 
-					<input type="text" id="hidBillIDSave" name="hidBillIDSave" value=" ">
+					<input type=" " id="hidBillIDSave" name="hidBillIDSave" value="">
 				</form>
 				<div id="alertSuccess" class="alert alert-success"></div>
 				<div id="alertError" class="alert alert-danger"></div>
