@@ -13,17 +13,17 @@
 <body>
 	<div class="container-fluid">
 		<div class="jumbotron bg-light">
-			<h1>ElectroGrid Systems</h1>
-			<h3>Power Management</h3>
+			<center>
+			<h1 style="font-family:verdana;" class="p-3 mb-2">ElectroGrid Systems</h1>
+			<h3 style="font-family:courier;" class="p-3 mb-2">Bill Management</h3>
+			</center>
 			<div class="navigation" style="float: right">
 				<ul class="nav nav-pills">
-					<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link disabled" href="#">Power
-							Management</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Billing</a>
+					<li class="nav-item"><a class="nav-link" href="home.jsp">Home</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="bill.jsp">Bill Management</a></li>
+					<li class="nav-item"><a class="nav-link" href="customer.js">Customer</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#">Customer
-							Management</a></li>
+					<li class="nav-item"><a class="nav-link" href="manage.js">Customer Management</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Help</a></li>
 				</ul>
 			</div>
@@ -153,18 +153,10 @@
 			<!-- Footer Links -->
 			<!-- Copyright -->
 			<div class="footer-copyright text-center py-3">
-				© 2020 Copyright: <a href="/"> MDBootstrap.com</a>
+				Â© 2022 - Bootstrap: <a href="/"> PAF-PROJECT 2022</a>
 			</div>
 			<!-- Copyright -->
 		</footer>
 	</div>
-	<script>
-            //Date picker
-            $(function () {
-                $('#reservationdate').datetimepicker({
-                    format: 'L'
-                });
-            });
-        </script>
 </body>
 </html>
