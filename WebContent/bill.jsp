@@ -153,7 +153,7 @@
 			<!-- Footer Links -->
 			<!-- Copyright -->
 			<div class="footer-copyright text-center py-3">
-				© 2022 - Bootstrap: <a href="/"> PAF-PROJECT 2022</a>
+				Â© 2022 - Bootstrap: <a href="/"> PAF-PROJECT 2022</a>
 			</div>
 			<!-- Copyright -->
 		</footer>
