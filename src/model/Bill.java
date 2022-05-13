@@ -94,7 +94,7 @@ public class Bill {
 				 
 				 
 				 // Prepare the html table to be displayed
-				 output = "<table border='1' class='table table-dark table-hover'>"
+				 output = "<table border='1' class='table table-bordered'>"
 				 		 + "<tr><th>billName</th>" 
 				 		+"<th>billAmount</th>"
 						 +"<th>billDate</th>"
