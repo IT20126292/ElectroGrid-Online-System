@@ -1,4 +1,4 @@
-<%@ page import="model.Bill"%>
+<%@ page import="model.Customer"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -8,13 +8,14 @@
 <title>Bill</title>
 <link rel="stylesheet" href="View/bootstrap.min.css">
 <script src="Components/jquery-3.2.1.min.js"></script>
-<script src="Components/bill.js"></script>
+<script src="Components/customer.js"></script>
 </head>
 <body>
         <div class="container-fluid">
+        	<!-- HEADER -->
             <div class="jumbotron bg-light">
                 <h1>ElectroGrid Systems</h1>
-                <h3>Power Management</h3>
+                <h3>Customer Management</h3>
                 <div class="navigation" style="float:right">
                     <ul class="nav nav-pills">
                         <li class="nav-item">
@@ -35,6 +36,9 @@
                     </ul>
                 </div>
             </div>
+            <!-- HEADER -->
+            
+            <!-- BODY -->
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -44,18 +48,22 @@
                         <!-- INSERT FORM START-->
                         <div class="card-body">
                             <form id="formBill" name="formBill" method="post" action="bill.jsp" class="col">
-								billName: 
+								cus_Name: 
 								<input id="billName" name="billName" type="text" class="form-control form-control-sm"> <br> 
-							    billAmount:
+							    cus_Nic:
 								<input id="billAmount" name="billAmount" type="number" class="form-control form-control-sm" type="number"> <br> 
-								billDate: 
+								cus_addr: 
 								<input id="billDate" name="billDate" type="date" class="form-control form-control-sm" type="date"> <br>
-								NoOfTunits: 
+								cus_pnumber: 
 								<input id="NoOfTunits" name="NoOfTunits" type="number" class="form-control form-control-sm"> <br> 
-							    Bill Arrears:
+							    cus_email:
 								<input id="BillAr" name="BillAr" type="text" class="form-control form-control-sm"> <br> 
+								cus_email:
+								<input id="BillAr" name="BillAr" type="text" class="form-control form-control-sm"> <br> 
+								<!-- SAVE & INPUT FIELD Start-->
 								<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary"> 
 								<input id="hidBillIDSave" name="hidBillIDSave" type="number" value="">
+								<!-- SAVE & INPUT FIELD End-->
 							</form>
 							<div id="alertSuccess" class="alert alert-success"></div>
 							<div id="alertError" class="alert alert-danger"></div>
@@ -103,6 +111,9 @@
                     </div>
                 </div>
             </div>
+            <!-- BODY -->
+            
+            <!-- FOOTER -->
             <footer class="page-footer font-small pt-4 bg-light" style="margin-top: 2%">
 
                 <!-- Footer Links -->
@@ -182,6 +193,7 @@
                 </div>
                 <!-- Copyright -->
             </footer>
+            <!-- FOOTER -->
         </div>
     </body>
 </html>
