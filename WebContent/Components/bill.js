@@ -66,7 +66,7 @@ if (status == "success")
 
 $(document).on("click", ".btnUpdate", function(event)
 { 
-$("#hidBillIDSave").val($(this).data("#billID")); 
+$("#hidBillIDSave").val($(this).data("#billid")); 
  $("#billName").val($(this).closest("tr").find('td:eq(0)').text()); 
  $("#billAmount").val($(this).closest("tr").find('td:eq(1)').text()); 
  $("#billDate").val($(this).closest("tr").find('td:eq(2)').text()); 

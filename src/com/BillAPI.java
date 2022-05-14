@@ -75,7 +75,7 @@ public class BillAPI extends HttpServlet {
 		response.getWriter().write(output); 
 	}
 
-	private Map<String, String> getParasMap(HttpServletRequest request) {
+	private Map getParasMap(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		 Map<String, String> map = new HashMap<String, String>(); 
 			try
