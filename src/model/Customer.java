@@ -1,167 +1,214 @@
 package model;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Customer {
+		// Implement to Connect with DataBase
+		public Connection connect() {
+			Connection con = null;
 
-	private Connection connect() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			// Provide the correct details: DBServer/DBName, username, password
-			con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/electri?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-					"root", "");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return con;
-	}
-
-	public String insertCustomer(String cus_Name, String cus_Nic, String cus_addr, String cus_pnumber, String cus_email, String cus_pwd) {
-		String output = "";
-		try {
-			Connection con = connect();
-			if (con == null) {
-				return "Error while connecting to the database for inserting.";
-			}
-			// create a prepared statement
-			String query = " insert into customer(`cID`,`cus_Name`,`cus_Nic`,`cus_addr`,`cus_pnumber`,`cus_email`,`cus_pwd`)"
-					+ " values (?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-			// binding values
-			preparedStmt.setInt(1, 0);
-			preparedStmt.setString(2, cus_Name);
-			preparedStmt.setString(3, cus_Nic);
-			preparedStmt.setString(4, cus_addr);
-			preparedStmt.setString(5, cus_pnumber);
-			preparedStmt.setString(6, cus_email);
-			preparedStmt.setString(7, cus_pwd);
-			// execute the statement
-			preparedStmt.execute();
-			con.close();
-			output = "New User Created Successfully !";
-		} catch (Exception e) {
-			output = "Error while inserting the customer.";
-			System.err.println(e.getMessage());
-		}
-		return output;
-	}
-
-	public String readCustomer() {
-		String output = "";
-		try {
-			Connection con = connect();
-			if (con == null) {
-				return "Error while connecting to the database for reading.";
-			}
-			// Prepare the html table to be displayed
-			output = "<table border=\"1\"><tr><th>ID</th><th>Customer Name</th><th>Customer NIC</th><th>Customer Address</th><th>Customer PhoneNumber</th><th>Customer Email</th><th>Customer Pass</th></tr>";
-			String query = "select * from customer";
-			Statement stmt = (Statement) con.createStatement();
-			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
-			// iterate through the rows in the result set
-			while (rs.next()) {
-				String cID = Integer.toString(rs.getInt("cID"));
-				String cus_Name = rs.getString("cus_Name");
-				String cus_Nic = rs.getString("cus_Nic");
-				String cus_addr = rs.getString("cus_addr");
-				String cus_pnumber = rs.getString("cus_pnumber");
-				String cus_email = rs.getString("cus_email");
-				String cus_pwd = rs.getString("cus_pwd");
-
-				// Add into the html table
-				output += "<tr><td>" + cID + "</td>";
-				output += "<td>" + cus_Name + "</td>";
-				output += "<td>" + cus_Nic + "</td>";
-				output += "<td>" + cus_addr + "</td>";
-				output += "<td>" + cus_pnumber + "</td>";
-				output += "<td>" + cus_email + "</td>";
-				output += "<td>" + cus_pwd + "</td>";
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				con= DriverManager.getConnection("jdbc:mysql://localhost:3306/electri?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+												"root", "");
+				// For testing purpose
+				System.out.print("Succesfully connected to the DB");
+				
+			} catch (Exception e) {
+				e.printStackTrace();
 				
 			}
-			con.close();
-			// Complete the html table
-			output += "</table>";
-		} catch (Exception e) {
-			output = "Error while reading the customer.";
-			System.err.println(e.getMessage());
+			return con;
+
 		}
-		return output;
-	}
-
-	public String updateCustomer(String cID, String cus_Name, String cus_Nic, String cus_addr, String cus_pnumber, String cus_email, String cus_pwd) {
-		String output = "";
-
-		try {
+		
+		public String createNewCustomer(String cus_Name, String cus_Nic, String cus_addr, String cus_pnumber, String cus_email, String cus_pwd) { 
 			Connection con = connect();
+			String output = "";
+			
+			try	{ 
+				  
+				 if (con == null) { 
+				    return "Error while connecting to the database"; 
+				 } 
+				 
+				 // create a prepared statement
+				 String query = " insert into customer (`cID`,`cus_Name`,`cus_Nic`,`cus_addr`,`cus_pnumber`,`cus_email`,`cus_pwd`)"+ " values (?, ?, ?, ?, ?, ?, ?)"; 
+				 PreparedStatement Pstatement = con.prepareStatement(query); 
+				 
+				 // binding values
+				 Pstatement.setInt(1, 0); 
+				 Pstatement.setString(2, cus_Name); 
+				 Pstatement.setString(3, cus_Nic); 
+				 Pstatement.setString(4, cus_addr); 
+				 Pstatement.setString(5, cus_pnumber);
+				 Pstatement.setString(6, cus_email);
+				 Pstatement.setString(7, cus_pwd);
+				 
+				//execute the statement
+				 Pstatement.execute(); 
+				 con.close();
+		
+				 String newCustomer = retrieveAllCustomer(); 
+				 output = "{\"status\":\"success\", \"data\": \"" + newCustomer + "\"}"; 
+				 
+			} catch (Exception e) { 
+				 output = "{\"status\":\"error\", \"data\": \"Error while inserting the Bill.\"}"; 
+				 
+				 System.err.println(e.getMessage()); 
+			} 
+			//binding values
+			return output; 
+		}
+		
+		//Read the bill
+		public String retrieveAllCustomer() { 
+			 String output = ""; 
+			 
+			 try { 
+			     Connection con = connect(); 
+			     
+				 if (con == null) { 
+					 return "Error while connecting to the database for reading the Bills."; 
+				 } 
+				 
+				 
+				 // Prepare the html table to be displayed
+				 output =  "<table border='1' class='table table-dark table-hover'>"
+				 		 + "<tr><th>cus_Name</th>"
+				 		 + "<th>cus_Nic</th>"
+						 + "<th>cus_addr</th>"
+						 + "<th>cus_pnumber</th>"
+						 + "<th>cus_email</th>"
+						 + "<th>cus_pwd</th>"
+						 + "<th>Update</th>"
+						 + "<th>Delete</th></tr>"; 
+				 
+				 String query = "select * from customer"; 
+				 
+				 Statement stmt = (Statement) con.createStatement(); 
+				 ResultSet res = ((java.sql.Statement) stmt).executeQuery(query); 
+				 
+				 // iterate through the rows in the result set
+				 while (res.next()) { 
+					 String cID = Integer.toString(res.getInt("cID")); 
+					 String cus_Name = res.getString("cus_Name"); 
+					 String cus_Nic = res.getString("cus_Nic"); 
+					 String cus_addr = res.getString("cus_addr"); 
+					 String cus_pnumber = res.getString("cus_pnumber"); 
+					 String cus_email = res.getString("cus_email");
+					 String cus_pwd = res.getString("cus_pwd");
+					  
+					 // Add a row into the html table
+					 output += "<tr><td>" + cus_Name + "</td>"; 
+					 output += "<td>" + cus_Nic + "</td>"; 
+					 output += "<td>" + cus_addr + "</td>";
+					 output += "<td>" + cus_pnumber + "</td>"; 
+					 output += "<td>" + cus_email + "</td>";
+					 output += "<td>" + cus_pwd + "</td>";
+					 
+					 				 
+					 // buttons
+					 output += "<td><input name='btnUpdate' type='button' value='Update' "
+							 + "class='btnUpdate btn btn-secondary' data-billid='" + cID + "'></td>"
+							 
+							 + "<td><input name='btnRemove' type='button' value='Remove' "
+							 + "class='btnRemove btn btn-danger' data-billid='" + cID + "'></td></tr>";
+				 } 
+				 
+				 con.close(); 
+				
+				 // Complete the html table
+				 output += "</table>";
+				 
+			 } catch (Exception e) { 
+					 output = "Error while reading the bill details."; 
+					 System.err.println(e.getMessage()); 
+			 } 
+			
+			 return output; 
+		}
+		
+		
+		// Update buyers in the table
+		public String updateCustomer(String cID, String cus_Name, String cus_Nic, String cus_addr, String cus_pnumber, String cus_email, String cus_pwd) { 
+			String output = "";
+			
+			try { 
+				Connection con = connect();
+				
+				if (con == null) {
+					return "Error while connecting to the database for updating the bill."; 
+						 
+				} 
+				// create a prepared statement
+				String query = "UPDATE customer SET cus_Name=?, cus_Nic=?, cus_addr=?, cus_pnumber=?, cus_email=?, cus_pwd=? WHERE cID=?";
+						
+				PreparedStatement preparedStmt = con.prepareStatement(query);
+					 
+				// binding values
+					 
+				preparedStmt.setString(1, cus_Name); 
+				preparedStmt.setString(2, cus_Nic); 
+				preparedStmt.setString(3, cus_addr); 
+				preparedStmt.setString(4, cus_pnumber); 
+				preparedStmt.setString(5, cus_email);
+				preparedStmt.setString(6, cus_pwd);
+				preparedStmt.setInt(7, Integer.parseInt(cID)); 
+					 
+					 
+				// execute the statement
+				preparedStmt.execute(); 
+				con.close(); 
+				String updateCustomer = retrieveAllCustomer(); 
+				output = "{\"status\":\"success\", \"data\": \"" + updateCustomer + "\"}"; 
+						 
+					   
+			} catch (Exception e) { 
+				output = "{\"status\":\"error\", \"data\": \"Error while Updating the Bill.\"}"; 
+				System.err.println(e.getMessage()); 
+			} 
+					 
+			return output; 
+		}
+		
+		
+		// Delete buyer in the table
+		public String deleteCustomer(String cID) {
+			String output = "";
 
-			if (con == null) {
-				return "Error while connecting to the database for updating.";
+			try {
+				Connection con = connect();
+
+				if (con == null) {
+					return "Error while connecting to the database for deleting the bill.";
+				}
+
+				// create a prepared statement
+				String query = "delete from customer where cID=?";
+				PreparedStatement preparedStmt = con.prepareStatement(query);
+
+				// binding values
+				preparedStmt.setInt(1, Integer.parseInt(cID));
+
+				// execute the statement
+				preparedStmt.execute();
+				con.close();
+
+				String deleteCustomer = retrieveAllCustomer(); 
+				output = "{\"status\":\"success\", \"data\": \"" + deleteCustomer + "\"}"; 
+				
+
+			} catch (Exception e) {
+				output = "{\"status\":\"error\", \"data\": \"Error while Deleting the Bill.\"}"; 
+				System.err.println(e.getMessage()); 
 			}
 
-			// create a prepared statement
-			String query = "UPDATE customer SET cus_Name=?,cus_Nic=?,cus_addr=?,cus_pnumber=?,cus_email=?,cus_pwd=?" + "WHERE cID=?";
-
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-
-			// binding values
-			preparedStmt.setString(1, cus_Name);
-			preparedStmt.setString(2, cus_Nic);
-			preparedStmt.setString(3, cus_addr);
-			preparedStmt.setString(4, cus_pnumber);
-			preparedStmt.setString(5, cus_pwd);
-			preparedStmt.setString(6, cus_pwd);
-			preparedStmt.setInt(7, Integer.parseInt(cID));
-
-			// execute the statement
-			preparedStmt.execute();
-			con.close();
-
-			output = "Updated successfully";
-		} catch (Exception e) {
-			output = "Error while updating the customer.";
-			System.err.println(e.getMessage());
+			return output;
 		}
-
-		return output;
-	}
-
-	public String deleteCustomer(String cID) {
-		String output = "";
-
-		try {
-			Connection con = connect();
-
-			if (con == null) {
-				return "Error while connecting to the database for deleting.";
-			}
-
-			// create a prepared statement
-			String query = "delete from customer where cID=?";
-
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-
-			// binding values
-			preparedStmt.setInt(1, Integer.parseInt(cID));
-
-			// execute the statement
-			preparedStmt.execute();
-			con.close();
-
-			output = "User Deleted successfully";
-		} catch (Exception e) {
-			output = "Error while deleting the user.";
-			System.err.println(e.getMessage());
-		}
-
-		return output;
-	}
 
 }
