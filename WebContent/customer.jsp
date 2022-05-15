@@ -47,22 +47,22 @@
                         </div>
                         <!-- INSERT FORM START-->
                         <div class="card-body">
-                            <form id="formBill" name="formBill" method="post" action="bill.jsp" class="col">
+                            <form id="formCustomer" name="formCustomer" method="post" action="customer.jsp" class="col">
 								cus_Name: 
-								<input id="billName" name="billName" type="text" class="form-control form-control-sm"> <br> 
+								<input id="cus_Name" name="cus_Name" type="text" class="form-control form-control-sm"> <br> 
 							    cus_Nic:
-								<input id="billAmount" name="billAmount" type="number" class="form-control form-control-sm" type="number"> <br> 
+								<input id="cus_Nic" name="cus_Nic" type="number" class="form-control form-control-sm" type="number"> <br> 
 								cus_addr: 
-								<input id="billDate" name="billDate" type="date" class="form-control form-control-sm" type="date"> <br>
+								<input id="cus_addr" name="cus_addr" type="text" class="form-control form-control-sm" type="date"> <br>
 								cus_pnumber: 
-								<input id="NoOfTunits" name="NoOfTunits" type="number" class="form-control form-control-sm"> <br> 
+								<input id="cus_pnumber" name="cus_pnumber" type="number" class="form-control form-control-sm"> <br> 
 							    cus_email:
 								<input id="BillAr" name="BillAr" type="text" class="form-control form-control-sm"> <br> 
-								cus_email:
-								<input id="BillAr" name="BillAr" type="text" class="form-control form-control-sm"> <br> 
+								cus_pwd:
+								<input id="cus_pwd" name="cus_pwd" type="text" class="form-control form-control-sm"> <br> 
 								<!-- SAVE & INPUT FIELD Start-->
 								<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary"> 
-								<input id="hidBillIDSave" name="hidBillIDSave" type="number" value="">
+								<input id="hidCustomerIDSave" name="hidBillIDSave" type="number" value="">
 								<!-- SAVE & INPUT FIELD End-->
 							</form>
 							<div id="alertSuccess" class="alert alert-success"></div>
@@ -80,10 +80,10 @@
                     </div>
                     <div class="card">
                         <div class="table-responsive-md">
-                            <div id="divBillGrid row">
+                            <div id="divCustomerGrid row">
 								<%
-								Bill billObj = new Bill();
-								out.print(billObj.readBill());
+								Customer cusObj = new Customer();
+								out.print(cusObj.retrieveAllCustomer());
 								%>
 							</div>
                         </div>

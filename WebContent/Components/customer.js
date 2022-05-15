@@ -14,7 +14,7 @@ $(document).on("click", "#btnSave", function(event)
  $("#alertError").text(""); 
  $("#alertError").hide(); 
 // Form validation-------------------
-var status = validatePaymentForm(); 
+var status = validateCustomerForm(); 
 if (status != true) 
  { 
  $("#alertError").text(status); 
@@ -22,21 +22,21 @@ if (status != true)
  return; 
  } 
 // If valid------------------------
-var type = ($("#hidPaymentIDSave").val() == "") ? "POST" : "PUT"; 
+var type = ($("#hidCustomerIDSave").val() == "") ? "POST" : "PUT"; 
  $.ajax( 
  { 
- url : "PaymentAPI", 
+ url : "CustomerAPI", 
  type : type, 
- data : $("#formPayment").serialize(), 
+ data : $("#formCustomer").serialize(), 
  dataType : "text", 
  complete : function(response, status) 
  { 
- onPaymentSaveComplete(response.responseText, status); 
+ onCustomerSaveComplete(response.responseText, status); 
  } 
  }); 
 });
 
-function onPaymentSaveComplete(response, status)
+function onCustomerSaveComplete(response, status)
 { 
 if (status == "success") 
  { 
@@ -45,7 +45,7 @@ if (status == "success")
  { 
  $("#alertSuccess").text("Successfully saved."); 
  $("#alertSuccess").show(); 
- $("#divPaymentGrid").html(resultSet.data); 
+ $("#divCustomerGrid").html(resultSet.data); 
  } else if (resultSet.status.trim() == "error") 
  { 
  $("#alertError").text(resultSet.data); 
@@ -60,39 +60,37 @@ if (status == "success")
  $("#alertError").text("Unknown error while saving.."); 
  $("#alertError").show(); 
  } 
- $("#hidPaymentIDSave").val(""); 
+ $("#hidCustomerIDSave").val(""); 
  $("#formItem")[0].reset(); 
 }
 
 $(document).on("click", ".btnUpdate", function(event)
 { 
-$("#hidPaymentIDSave").val($(this).data("paymentid")); 
- $("#Name").val($(this).closest("tr").find('td:eq(0)').text()); 
- $("#Email").val($(this).closest("tr").find('td:eq(1)').text()); 
- $("#Address").val($(this).closest("tr").find('td:eq(2)').text()); 
- $("#ContactNumber").val($(this).closest("tr").find('td:eq(3)').text()); 
- $("#CardName").val($(this).closest("tr").find('td:eq(4)').text()); 
- $("#CreditCardNumber").val($(this).closest("tr").find('td:eq(5)').text()); 
- $("#ExpiryDate").val($(this).closest("tr").find('td:eq(6)').text());
- $("#CVV").val($(this).closest("tr").find('td:eq(7)').text());  
+$("#hidCustomerIDSave").val($(this).data("cID")); 
+ $("#cus_Name").val($(this).closest("tr").find('td:eq(0)').text()); 
+ $("#cus_Nic").val($(this).closest("tr").find('td:eq(1)').text()); 
+ $("#cus_addr").val($(this).closest("tr").find('td:eq(2)').text()); 
+ $("#cus_pnumber").val($(this).closest("tr").find('td:eq(3)').text()); 
+ $("#cus_email").val($(this).closest("tr").find('td:eq(4)').text()); 
+ $("#cus_pwd").val($(this).closest("tr").find('td:eq(5)').text());   
 });
 
 $(document).on("click", ".btnRemove", function(event)
 { 
  $.ajax( 
  { 
- url : "PaymentAPI", 
+ url : "CustomerAPI", 
  type : "DELETE", 
- data : "PaymentID=" + $(this).data("paymentid"),
+ data : "cID=" + $(this).data("cID"),
  dataType : "text", 
  complete : function(response, status) 
  { 
- onPaymentDeleteComplete(response.responseText, status); 
+ onCustomerDeleteComplete(response.responseText, status); 
  } 
  }); 
 });
 
-function onPaymentDeleteComplete(response, status)
+function onCustomerDeleteComplete(response, status)
 { 
 if (status == "success") 
  { 
@@ -101,7 +99,7 @@ if (status == "success")
  { 
  $("#alertSuccess").text("Successfully deleted."); 
  $("#alertSuccess").show(); 
- $("#divPaymentGrid").html(resultSet.data); 
+ $("#divCustomerGrid").html(resultSet.data); 
  } else if (resultSet.status.trim() == "error") 
  { 
  $("#alertError").text(resultSet.data); 
@@ -117,68 +115,43 @@ if (status == "success")
  $("#alertError").show(); 
  } 
 }
-function validatePaymentForm() 
+function validateCustomerForm() 
 {
-	//NAME
-	if ($("#Name").val().trim() == "")
+	//CUSTOMER NAME
+	if ($("#cus_Name").val().trim() == "")
 	{
 	return "Insert Name.";
 	}
 	
-	// EMAIL
-	if ($("#Email").val().trim() == "")
+	//CUSTOMER EMAIL
+	if ($("#cus_Nic").val().trim() == "")
 	{
 	return "Insert Email.";
 	}
 	
-	// ADDRESS-------------------------------
-	if ($("#Address").val().trim() == "")
+	//CUSTOMER ADDRESS-------------------------------
+	if ($("#cus_addr").val().trim() == "")
 	{
 	return "Insert Address.";
 	}
 	
-	// CONTACT NUMBER-------------------------------
-	if ($("#ContactNumber").val().trim() == "")
-	{
-	return "Insert Contact Number.";
-	}
-	
 	// is numerical value
-	var tmpContactNumber = $("#ContactNumber").val().trim();
+	var tmpContactNumber = $("#cus_pnumber").val().trim();
 	if (!$.isNumeric(tmpContactNumber))
 	{
 	return "Insert a numerical value for Contact Number.";
 	}
 	
-	// NAME ON CARD-------------------------------
-	if ($("#CardName").val().trim() == "")
+	//CUSTOMER EMAIL-------------------------------
+	if ($("#cus_email").val().trim() == "")
 	{
-	return "Insert Name on card.";
-	}
-
-	// CREDIT CARD NUMBER-------------------------------
-	if ($("#CreditCardNumber").val().trim() == "")
-	{
-	return "Insert Credit Card Number.";
-	}
-
-	// EXPIRY DATE-------------------------------
-	if ($("#ExpiryDate").val().trim() == "")
-	{
-	return "Insert Expiry date.";
-	}
-
-	// CVV------------------------
-	if ($("#CVV").val().trim() == "")
-	{
-	return "Insert CVV.";
+	return "Insert Contact Number.";
 	}
 	
-	// is numerical value
-	var tmpCVV = $("#CVV").val().trim();
-	if (!$.isNumeric(tmpCVV))
+	//CUSTOMER PWD-------------------------------
+	if ($("#cus_pwd").val().trim() == "")
 	{
-	return "Insert a numerical value for CVV.";
+	return "Insert Name on card.";
 	}
 return true; 
 }

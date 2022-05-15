@@ -57,7 +57,7 @@ public class Customer {
 				 output = "{\"status\":\"success\", \"data\": \"" + newCustomer + "\"}"; 
 				 
 			} catch (Exception e) { 
-				 output = "{\"status\":\"error\", \"data\": \"Error while inserting the Bill.\"}"; 
+				 output = "{\"status\":\"error\", \"data\": \"Error while inserting the Customer.\"}"; 
 				 
 				 System.err.println(e.getMessage()); 
 			} 
@@ -126,7 +126,7 @@ public class Customer {
 				 output += "</table>";
 				 
 			 } catch (Exception e) { 
-					 output = "Error while reading the bill details."; 
+					 output = "Error while reading the customer details."; 
 					 System.err.println(e.getMessage()); 
 			 } 
 			
