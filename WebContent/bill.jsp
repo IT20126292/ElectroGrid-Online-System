@@ -27,7 +27,7 @@
                             <a class="nav-link" href="#">Billing</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Customer Management</a>
+                            <a class="nav-link" href="customer.jsp">Customer Management</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Help</a>

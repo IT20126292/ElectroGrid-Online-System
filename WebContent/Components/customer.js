@@ -81,7 +81,7 @@ $(document).on("click", ".btnRemove", function(event)
  { 
  url : "CustomerAPI", 
  type : "DELETE", 
- data : "cID=" + $(this).data("cID"),
+ data : "cID=" + $(this).data("customerid"),
  dataType : "text", 
  complete : function(response, status) 
  { 
@@ -123,10 +123,10 @@ function validateCustomerForm()
 	return "Insert Name.";
 	}
 	
-	//CUSTOMER EMAIL
+	//CUSTOMER NIC
 	if ($("#cus_Nic").val().trim() == "")
 	{
-	return "Insert Email.";
+	return "Insert NIC.";
 	}
 	
 	//CUSTOMER ADDRESS-------------------------------
@@ -145,13 +145,13 @@ function validateCustomerForm()
 	//CUSTOMER EMAIL-------------------------------
 	if ($("#cus_email").val().trim() == "")
 	{
-	return "Insert Contact Number.";
+	return "Insert Mail Address.";
 	}
 	
 	//CUSTOMER PWD-------------------------------
 	if ($("#cus_pwd").val().trim() == "")
 	{
-	return "Insert Name on card.";
+	return "Insert Password.";
 	}
 return true; 
 }

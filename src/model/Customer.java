@@ -114,10 +114,10 @@ public class Customer {
 					 				 
 					 // buttons
 					 output += "<td><input name='btnUpdate' type='button' value='Update' "
-							 + "class='btnUpdate btn btn-secondary' data-billid='" + cID + "'></td>"
+							 + "class='btnUpdate btn btn-secondary' data-customerid='" + cID + "'></td>"
 							 
 							 + "<td><input name='btnRemove' type='button' value='Remove' "
-							 + "class='btnRemove btn btn-danger' data-billid='" + cID + "'></td></tr>";
+							 + "class='btnRemove btn btn-danger' data-customerid='" + cID + "'></td></tr>";
 				 } 
 				 
 				 con.close(); 

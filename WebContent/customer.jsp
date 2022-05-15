@@ -28,7 +28,7 @@
                             <a class="nav-link" href="#">Billing</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Customer Management</a>
+                            <a class="nav-link" href="customer.jsp">Customer Management</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Help</a>
@@ -43,26 +43,26 @@
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Monthly Supply Data</h4>
+                            <h4>Register New Customer</h4>
                         </div>
                         <!-- INSERT FORM START-->
                         <div class="card-body">
                             <form id="formCustomer" name="formCustomer" method="post" action="customer.jsp" class="col">
-								cus_Name: 
+								Customer Name: 
 								<input id="cus_Name" name="cus_Name" type="text" class="form-control form-control-sm"> <br> 
-							    cus_Nic:
+							    Customer NIC:
 								<input id="cus_Nic" name="cus_Nic" type="number" class="form-control form-control-sm" type="number"> <br> 
-								cus_addr: 
+								Customer Address: 
 								<input id="cus_addr" name="cus_addr" type="text" class="form-control form-control-sm" type="date"> <br>
-								cus_pnumber: 
+								Customer Phone Number: 
 								<input id="cus_pnumber" name="cus_pnumber" type="number" class="form-control form-control-sm"> <br> 
-							    cus_email:
-								<input id="BillAr" name="BillAr" type="text" class="form-control form-control-sm"> <br> 
-								cus_pwd:
+							    Customer Email:
+								<input id="cus_email" name="cus_email" type="email" class="form-control form-control-sm"> <br> 
+								Customer Password:
 								<input id="cus_pwd" name="cus_pwd" type="text" class="form-control form-control-sm"> <br> 
 								<!-- SAVE & INPUT FIELD Start-->
 								<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary"> 
-								<input id="hidCustomerIDSave" name="hidBillIDSave" type="number" value="">
+								<input id="hidCustomerIDSave" name="hidCustomerIDSave" type="number" value="">
 								<!-- SAVE & INPUT FIELD End-->
 							</form>
 							<div id="alertSuccess" class="alert alert-success"></div>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="">
-                        <h4>Supply History</h4><hr><br>
+                        <h4>Registered Customer History</h4><hr><br>
                     </div>
                     <div class="card">
                         <div class="table-responsive-md">
